@@ -1,0 +1,61 @@
+[[repos]]
+repo = "builtin"
+hooks = [
+  { id = "check-added-large-files", stages = ["pre-commit"] },
+  { id = "check-case-conflict", stages = ["pre-commit"] },
+  { id = "check-executables-have-shebangs", stages = ["pre-commit"] },
+  { id = "check-yaml", stages = ["pre-commit"] },
+  { id = "check-json", stages = ["pre-commit"] },
+  { id = "check-merge-conflict", stages = ["pre-commit"] },
+  { id = "end-of-file-fixer", stages = ["pre-commit"] },
+  { id = "mixed-line-ending", stages = ["pre-commit"] },
+  { id = "trailing-whitespace", stages = ["pre-commit"] },
+]
+
+[[repos]]
+repo = "https://github.com/tombi-toml/tombi-pre-commit"
+rev = "v0.9.20"
+hooks = [
+  { id = "tombi-format", stages = ["pre-commit"] },
+  { id = "tombi-lint", args = ["--error-on-warnings"], stages = ["pre-commit"] },
+]
+
+[[repos]]
+repo = "https://github.com/rhysd/actionlint"
+rev = "v1.7.12"
+hooks = [{ id = "actionlint", stages = ["pre-commit"] }]
+
+[[repos]]
+repo = "https://github.com/zizmorcore/zizmor-pre-commit"
+rev = "v1.29.0"
+hooks = [
+  {
+    id = "zizmor",
+    args = ["--offline", "--strict-collection", "--min-severity=high"],
+    files = "^\\.github/(?:workflows/.*\\.ya?ml|actions/.*/action\\.ya?ml)$",
+    stages = ["pre-commit"]
+  },
+]
+
+[[repos]]
+repo = "https://github.com/crate-ci/typos"
+rev = "v1.48.0"
+hooks = [{ id = "typos", args = ["--force-exclude"], stages = ["pre-commit"] }]
+
+[[repos]]
+repo = "https://github.com/zendev-lab/zendev"
+rev = "v0.3.0"
+hooks = [{ id = "zendev-message-check", stages = ["commit-msg"] }]
+
+[[repos]]
+repo = "local"
+hooks = [
+  {
+    id = "vp-check",
+    name = "vp check --fix",
+    entry = "vp check --fix",
+    language = "system",
+    pass_filenames = false,
+    stages = ["pre-commit"]
+  },
+]
