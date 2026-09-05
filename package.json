@@ -25,7 +25,14 @@
     "README.md"
   ],
   "scripts": {
-    "check": "svelte-check --tsconfig ./tsconfig.json"
+    "fix": "vp check --fix .",
+    "check": "vp check . && pnpm run svelte-check",
+    "svelte-check": "svelte-check --tsconfig ./tsconfig.json",
+    "format": "vp fmt .",
+    "format:check": "vp fmt --check .",
+    "lint": "vp lint --fix .",
+    "lint:check": "vp lint .",
+    "prepare": "prek install --hook-type commit-msg --hook-type pre-commit"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -37,13 +44,16 @@
     "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
+    "@j178/prek": "0.4.12",
     "svelte": "^5.38.8",
     "svelte-check": "^4.7.3",
     "tailwindcss": "^4.3.3",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite-plus": "0.2.8"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=22",
+    "pnpm": ">=11 <12"
   },
   "packageManager": "pnpm@11.24.0",
   "keywords": [
