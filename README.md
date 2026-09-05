@@ -31,8 +31,8 @@ Import once in your global CSS. Works in any app, even without components:
 ```
 
 Dark mode follows the `.dark` class on `<html>` (compatible with `mode-watcher`).
-Overlay animations use [`tw-animate-css`](https://github.com/Wombosvideo/tw-animate-css);
-install it as a direct dev dependency (`pnpm add -D tw-animate-css`) before importing.
+Overlay animations use `tw-animate-css`; install it as a direct dev dependency
+(`pnpm add -D tw-animate-css`) before importing.
 
 ### 2. Components
 
@@ -41,7 +41,9 @@ install it as a direct dev dependency (`pnpm add -D tw-animate-css`) before impo
   import { Button, Input, Label, Switch } from "mori-ui";
 </script>
 
-<Button variant="primary" size="md">Hello</Button>
+<Button>Hello</Button>
+<Button variant="outline" size="sm">Cancel</Button>
+<Button href="https://mori.zrr.dev">Link</Button>
 ```
 
 Compound components export their parts flat:
@@ -80,8 +82,21 @@ Compound components export their parts flat:
 
 ## Conventions
 
-- Components ship as uncompiled `.svelte` source (`"svelte": "./src/index.ts"`) — the consumer's Vite/Svelte plugin compiles them, avoiding Svelte version mismatches.
-- Styling API uses `tailwind-variants` (`variant` / `size` props), never boolean style props.
+Component APIs follow the same conventions as
+[shadcn-svelte](https://ui.shadcn.com) (built on the same `bits-ui` foundation),
+so examples and muscle memory transfer directly:
+
+- Every component forwards a bindable element `ref` (`ref = $bindable(null)`).
+- Every component/part carries a `data-slot` attribute for targeting and
+  debugging.
+- `Button` and `Badge` render as `<a>` when given `href` (disabled links lose
+  `href` and `tabindex`).
+- `Input` handles `type="file"` with a bindable `files` prop.
+- Components ship as uncompiled `.svelte` source (`"svelte": "./src/index.ts"`) —
+  the consumer's Vite/Svelte plugin compiles them, avoiding Svelte version
+  mismatches.
+- Styling API uses `tailwind-variants` (`variant` / `size` props), never
+  boolean style props.
 - Headless behavior builds on `bits-ui`; icons come from `@lucide/svelte`.
 
 ## Publishing
