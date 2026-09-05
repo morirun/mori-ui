@@ -4,11 +4,7 @@ import Content from "./DropdownMenuContent.svelte";
 import Item from "./DropdownMenuItem.svelte";
 import Separator from "./DropdownMenuSeparator.svelte";
 
-const Root = DialogOrMenuRoot();
+const Root = DropdownMenuPrimitive.Root;
 const Trigger = DropdownMenuPrimitive.Trigger;
-
-function DialogOrMenuRoot() {
-  return DropdownMenuPrimitive.Root;
-}
 
 export { Root, Trigger, Content, Item, Separator };
