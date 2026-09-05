@@ -1,21 +1,20 @@
 <script lang="ts">
   import { Label as LabelPrimitive } from "bits-ui";
-  import type { ComponentProps, Snippet } from "svelte";
   import { cn } from "../utils/cn.js";
 
   let {
-    class: className = "",
-    children,
-    ...rest
-  }: ComponentProps<typeof LabelPrimitive.Root> & { children?: Snippet } = $props();
+    ref = $bindable(null),
+    class: className,
+    ...restProps
+  }: LabelPrimitive.RootProps = $props();
 </script>
 
 <LabelPrimitive.Root
+  bind:ref
+  data-slot="label"
   class={cn(
-    "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+    "flex select-none items-center text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 group-data-[disabled=true]:pointer-events-none",
     className
   )}
-  {...rest}
->
-  {@render children?.()}
-</LabelPrimitive.Root>
+  {...restProps}
+/>

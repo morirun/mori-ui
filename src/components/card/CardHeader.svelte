@@ -1,15 +1,16 @@
 <script lang="ts">
-  import type { HTMLAttributes } from "svelte/elements";
-  import type { Snippet } from "svelte";
   import { cn } from "../../utils/cn.js";
+  import type { WithElementRef } from "../../utils/types.js";
+  import type { HTMLAttributes } from "svelte/elements";
 
   let {
-    class: className = "",
+    ref = $bindable(null),
+    class: className,
     children,
-    ...rest
-  }: HTMLAttributes<HTMLDivElement> & { children?: Snippet } = $props();
+    ...restProps
+  }: WithElementRef<HTMLAttributes<HTMLDivElement>, HTMLDivElement> = $props();
 </script>
 
-<div class={cn("flex flex-col gap-1.5 p-6", className)} {...rest}>
+<div bind:this={ref} data-slot="card-header" class={cn("flex flex-col gap-1.5 p-6", className)} {...restProps}>
   {@render children?.()}
 </div>

@@ -1,26 +1,27 @@
 <script lang="ts">
   import { DropdownMenu as DropdownMenuPrimitive } from "bits-ui";
-  import type { ComponentProps, Snippet } from "svelte";
   import { cn } from "../../utils/cn.js";
 
   let {
-    class: className = "",
+    ref = $bindable(null),
+    class: className,
     inset = false,
     children,
-    ...rest
-  }: ComponentProps<typeof DropdownMenuPrimitive.Item> & {
+    ...restProps
+  }: DropdownMenuPrimitive.ItemProps & {
     inset?: boolean;
-    children?: Snippet;
   } = $props();
 </script>
 
 <DropdownMenuPrimitive.Item
+  bind:ref
+  data-slot="dropdown-menu-item"
+  data-inset={inset || undefined}
   class={cn(
-    "relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
-    inset && "pl-8",
+    "relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
     className
   )}
-  {...rest}
+  {...restProps}
 >
   {@render children?.()}
 </DropdownMenuPrimitive.Item>

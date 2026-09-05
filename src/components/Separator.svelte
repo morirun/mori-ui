@@ -1,21 +1,21 @@
 <script lang="ts">
   import { Separator as SeparatorPrimitive } from "bits-ui";
-  import type { ComponentProps } from "svelte";
   import { cn } from "../utils/cn.js";
 
   let {
-    class: className = "",
-    orientation = "horizontal",
-    ...rest
-  }: ComponentProps<typeof SeparatorPrimitive.Root> = $props();
+    ref = $bindable(null),
+    class: className,
+    "data-slot": dataSlot = "separator",
+    ...restProps
+  }: SeparatorPrimitive.RootProps = $props();
 </script>
 
 <SeparatorPrimitive.Root
-  {orientation}
+  bind:ref
+  data-slot={dataSlot}
   class={cn(
-    "shrink-0 bg-border",
-    orientation === "vertical" ? "h-full w-px" : "h-px w-full",
+    "shrink-0 bg-border data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px",
     className
   )}
-  {...rest}
+  {...restProps}
 />
